@@ -8,7 +8,7 @@ const personSchema = new Schema({
     age: Number,
     favouriteFoods: [String]
 })
-const Person = mongoose.model('Person', personSchema);
+let Person = mongoose.model('Person', personSchema);
 const twat = new Person({name: "twat", age: 28, favouriteFoods: ["1", "2"]})
 console.log(twat);
 
