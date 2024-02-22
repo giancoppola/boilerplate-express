@@ -1,70 +1,70 @@
 require('dotenv').config();
-let express = require('express');
-let bodyParser = require('body-parser')
-let app = express();
+let mongoose = require('mongoose');
 
-function ToMessageStyle(str){
-    let res;
-    if (process.env.MESSAGE_STYLE == "uppercase"){
-        res = str.toUpperCase()
-        return res;
-    }
-    return str;
-}
+let Person;
 
-// static public files
-app.use("/public", express.static(__dirname + "/public"))
+const createAndSavePerson = (done) => {
+  done(null /*, data*/);
+};
 
-// Root
-app.use("/", bodyParser.urlencoded({extended: false}));
-app.use("/", (req, res, next) => {
-    console.log(req.method+" "+req.path+" - "+req.ip);
-    next();
-})
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/views/index.html")
-})
+const createManyPeople = (arrayOfPeople, done) => {
+  done(null /*, data*/);
+};
 
-app.get("/json", (req, res) => {
-    res.json({
-        message: ToMessageStyle("Hello json")
-    })
-})
+const findPeopleByName = (personName, done) => {
+  done(null /*, data*/);
+};
 
-app.get("/now", (req, res, next) => {
-    let time = new Date().toString();
-    req.time = time;
-    next()
-    },
-    (req, res) => {
-        res.json({
-            time: req.time
-    })
-})
+const findOneByFood = (food, done) => {
+  done(null /*, data*/);
+};
 
-app.get("/:word/echo", (req, res) => {
-    res.json({
-        echo: req.params.word
-    })
-})
+const findPersonById = (personId, done) => {
+  done(null /*, data*/);
+};
 
-app.use("/name", bodyParser.urlencoded({extended: false}))
-app.route("/name")
-    .get((req, res) => {
-        console.log(req.query);
-        let first = req.query.first != null ? req.query.first : "";
-        let last = req.query.last != null ? req.query.last : "";
-        res.json({
-            name: `${first} ${last}`
-        })
-    })
-    .post((req, res) => {
-        console.log(req.body);
-        let first = req.body.first != null ? req.body.first : "";
-        let last = req.body.last != null ? req.body.last : "";
-        res.json({
-            name: `${first} ${last}`
-        })
-    })
+const findEditThenSave = (personId, done) => {
+  const foodToAdd = "hamburger";
 
-module.exports = app;
+  done(null /*, data*/);
+};
+
+const findAndUpdate = (personName, done) => {
+  const ageToSet = 20;
+
+  done(null /*, data*/);
+};
+
+const removeById = (personId, done) => {
+  done(null /*, data*/);
+};
+
+const removeManyPeople = (done) => {
+  const nameToRemove = "Mary";
+
+  done(null /*, data*/);
+};
+
+const queryChain = (done) => {
+  const foodToSearch = "burrito";
+
+  done(null /*, data*/);
+};
+
+/** **Well Done !!**
+/* You completed these challenges, let's go celebrate !
+ */
+
+//----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
+
+exports.PersonModel = Person;
+exports.createAndSavePerson = createAndSavePerson;
+exports.findPeopleByName = findPeopleByName;
+exports.findOneByFood = findOneByFood;
+exports.findPersonById = findPersonById;
+exports.findEditThenSave = findEditThenSave;
+exports.findAndUpdate = findAndUpdate;
+exports.createManyPeople = createManyPeople;
+exports.removeById = removeById;
+exports.removeManyPeople = removeManyPeople;
+exports.queryChain = queryChain;
