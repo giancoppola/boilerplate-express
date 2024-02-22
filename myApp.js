@@ -7,18 +7,26 @@ const Schema = mongoose.Schema
 let personSchema = new Schema({
     name: { type: String, required: true },
     age: Number,
-    favouriteFoods: [String]
+    favoriteFoods: { type: [String] }
 })
 let Person = mongoose.model('Person', personSchema);
-const p = new Person({name: "name", age: 28, favouriteFoods: ["1", "2"]})
-console.log(p);
+const p = new Person({name: "name", age: 28, favoriteFoods: ["1", "2"]})
 
 const createAndSavePerson = (done) => {
-    done(null /*, data*/);
+    p.save((err, data) => {
+      if (err) return console.log(err);
+      done(null, data)
+    })
 };
 
+let peeps = []
+const p1 = new Person({name: "test", age: 1, favoriteFoods: ["1", "2"]})
+const p2 = new Person({name: "testing", age: 2, favoriteFoods: ["2", "2"]})
+const p3 = new Person({name: "testi", age: 3, favoriteFoods: ["3", "2"]})
+const p4 = new Person({name: "testn", age: 4, favoriteFoods: ["4", "2"]})
+peeps.push(p1, p2, p3, p4)
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople)
 };
 
 const findPeopleByName = (personName, done) => {
