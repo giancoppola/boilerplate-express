@@ -26,7 +26,17 @@ const p3 = new Person({name: "testi", age: 3, favoriteFoods: ["3", "2"]})
 const p4 = new Person({name: "testn", age: 4, favoriteFoods: ["4", "2"]})
 peeps.push(p1, p2, p3, p4)
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople)
+    try{
+        console.log(arrayOfPeople);
+        Person.create(arrayOfPeople, (e, d) => {
+            if (e) return console.log(e);
+            // The callback expects error, data - so we return null because no error
+            done(null, d);
+        })
+    }
+    catch(e){
+        console.log("error:", e);
+    }
 };
 
 const findPeopleByName = (personName, done) => {
